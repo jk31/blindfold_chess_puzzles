@@ -99,48 +99,49 @@
         </v-card-text>
       </v-card>
 
-      {{ numberOfPuzzles }}
-      {{ numberOfFilterredPuzzles }}
       {{ ratingRange }}
       {{ numberOfPiecesRange }}
-      <v-btn elevation="2" @click="loadPuzzles">Import puzzles</v-btn>
+      {{ numberOfFilteredPuzzles }}
     </div>
   </div>
 </template>
 
 <script>
-import puzzles from '../data/puzzles_alg.json';
+import { mapState } from 'vuex';
 
 export default {
   name: 'Test',
+  created() {
+    this.$store.dispatch('puzzles/loadPuzzles');
+  },
   data() {
-    return {
-      puzzles,
-      ratingMin: 400,
-      ratingMax: 3000,
-      ratingRange: [800, 1500],
-      numberOfPiecesMin: 3,
-      numberOfPiecesMax: 32,
-      numberOfPiecesRange: [4, 10],
-    };
+    return {};
   },
   computed: {
-    numberOfPuzzles() {
-      return this.puzzles.length;
+    ...mapState('puzzles', [
+      'ratingMin',
+      'ratingMax',
+      'numberOfPiecesMin',
+      'numberOfPiecesMax',
+    ]),
+    numberOfFilteredPuzzles() {
+      return this.$store.getters['puzzles/filteredPuzzles'].length;
     },
-    numberOfFilterredPuzzles() {
-      return this.puzzles.filter(
-        (puzzle) =>
-          puzzle.rating > this.ratingRange[0] &&
-          puzzle.rating < this.ratingRange[1] &&
-          puzzle.number_of_pieces > this.numberOfPiecesRange[0] &&
-          puzzle.number_of_pieces < this.numberOfPiecesRange[1]
-      ).length;
+    ratingRange: {
+      get() {
+        return this.$store.state.puzzles.ratingRange;
+      },
+      set(range) {
+        this.$store.commit('puzzles/updateRatingRange', range);
+      },
     },
-  },
-  methods: {
-    loadPuzzles() {
-      this.$store.dispatch({ type: 'loadPuzzles' });
+    numberOfPiecesRange: {
+      get() {
+        return this.$store.state.puzzles.numberOfPiecesRange;
+      },
+      set(range) {
+        this.$store.commit('puzzles/updateNumberOfPiecesRange', range);
+      },
     },
   },
 };

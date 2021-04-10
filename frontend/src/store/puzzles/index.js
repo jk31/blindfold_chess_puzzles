@@ -1,7 +1,7 @@
 export default {
+  namespaced: true,
   state: {
     puzzles: [],
-    filteredPuzzles: [],
     ratingMin: 400,
     ratingMax: 3000,
     ratingRange: [800, 1500],
@@ -10,18 +10,31 @@ export default {
     numberOfPiecesRange: [4, 10],
   },
   mutations: {
-    UPDATE_PUZZLES(state, { puzzles }) {
-      state.puzzles = puzzles;
+    updatePuzzles(state, payload) {
+      state.puzzles = payload.puzzles;
+    },
+    updateRatingRange(state, payload) {
+      state.ratingRange = payload;
+    },
+    updateNumberOfPiecesRange(state, payload) {
+      state.numberOfPiecesRange = payload;
     },
   },
   actions: {
     loadPuzzles(context) {
       const puzzles = require('../../data/puzzles_alg.json');
-      context.commit('UPDATE_PUZZLES', { puzzles });
+      context.commit('updatePuzzles', { puzzles });
     },
   },
   getters: {
-    getPuzzles: (state) => state.puzzles,
-    getFilteredPuzzles: (state) => state.filteredPuzzles,
+    filteredPuzzles: (state) => {
+      return state.puzzles.filter(
+        (puzzle) =>
+          puzzle.rating > state.ratingRange[0] &&
+          puzzle.rating < state.ratingRange[1] &&
+          puzzle.number_of_pieces > state.numberOfPiecesRange[0] &&
+          puzzle.number_of_pieces < state.numberOfPiecesRange[1]
+      );
+    },
   },
 };
