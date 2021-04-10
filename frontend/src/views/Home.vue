@@ -1,17 +1,19 @@
 <template>
   <div class="home">
-    <Test />
+    <FilterPuzzles />
+    <Puzzle />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import Test from '@/components/Test.vue';
+import FilterPuzzles from '@/components/FilterPuzzles.vue';
+import Puzzle from '@/components/Puzzle.vue';
 
 export default {
   name: 'Home',
   components: {
-    Test,
+    FilterPuzzles,
+    Puzzle,
   },
 };
 </script>

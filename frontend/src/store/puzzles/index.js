@@ -7,7 +7,7 @@ export default {
     ratingRange: [800, 1500],
     numberOfPiecesMin: 3,
     numberOfPiecesMax: 32,
-    numberOfPiecesRange: [4, 10],
+    numberOfPiecesRange: [4, 7],
   },
   mutations: {
     updatePuzzles(state, payload) {
