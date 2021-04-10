@@ -1,4 +1,6 @@
-<template></template>
+<template>
+  <div id="filter-puzzles"></div>
+</template>
 
 <script>
 export default {};

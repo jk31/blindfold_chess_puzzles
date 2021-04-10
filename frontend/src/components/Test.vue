@@ -16,12 +16,6 @@
     </div>
     <div id="filter">
       <h1>Filter</h1>
-      <!-- <v-range-slider
-        label="Puzzle Rating Range"
-        min="400"
-        max="3000"
-      ></v-range-slider> -->
-
       <v-card flat color="transparent">
         <v-subheader>Puzzle Rating Range</v-subheader>
 
@@ -109,6 +103,7 @@
       {{ numberOfFilterredPuzzles }}
       {{ ratingRange }}
       {{ numberOfPiecesRange }}
+      <v-btn elevation="2" @click="loadPuzzles">Import puzzles</v-btn>
     </div>
   </div>
 </template>
@@ -141,6 +136,11 @@ export default {
           puzzle.number_of_pieces > this.numberOfPiecesRange[0] &&
           puzzle.number_of_pieces < this.numberOfPiecesRange[1]
       ).length;
+    },
+  },
+  methods: {
+    loadPuzzles() {
+      this.$store.dispatch({ type: 'loadPuzzles' });
     },
   },
 };
