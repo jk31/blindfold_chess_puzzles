@@ -2,7 +2,7 @@
   <div id="puzzle" class="mb-3">
     <v-card elevation="2">
       <v-card-title class="mb-3"
-        ><b>{{ activePlayer }} to move.</b></v-card-title
+        ><b>{{ activePlayer }} to move</b></v-card-title
       >
       <v-card-subtitle
         >{{ inactivePlayer }} played {{ activePuzzle.moves_alg[0] }}.

@@ -25,6 +25,7 @@ export default {
       },
       id: 169,
     },
+    solutionVisible: false,
     puzzleHistory: {},
     ratingRange: [800, 1500],
     numberOfPiecesRange: [4, 7],
@@ -43,6 +44,9 @@ export default {
       state.activePuzzleExists = true;
       state.activePuzzle = payload;
     },
+    updateSolutionVisible(state, payload) {
+      state.solutionVisible = payload;
+    },
   },
   actions: {
     loadPuzzles({ commit }) {
@@ -59,6 +63,7 @@ export default {
       );
       let activePuzzle =
         filteredPuzzles[Math.floor(Math.random() * filteredPuzzles.length)];
+      commit('updateSolutionVisible', false);
       commit('updateActivePuzzle', activePuzzle);
     },
   },
