@@ -99,6 +99,7 @@ ul li {
   align-items: center;
 }
 .piece {
-  transform: scale(1);
+  transform: scale(1.1);
+  margin: 2px 10px 5px 2px;
 }
 </style>
