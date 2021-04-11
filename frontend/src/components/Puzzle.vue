@@ -12,12 +12,12 @@
       <v-card-text class="d-sm-flex justify-space-around">
         <ul>
           <li v-for="(squares, piece) in activePuzzle.positions" :key="piece">
-            <Piece piece="king_w" v-if="piece === 'K'" class="piece" />
-            <Piece piece="queen_w" v-if="piece === 'Q'" class="piece" />
-            <Piece piece="rook_w" v-if="piece === 'R'" class="piece" />
-            <Piece piece="bishop_w" v-if="piece === 'B'" class="piece" />
-            <Piece piece="knight_w" v-if="piece === 'N'" class="piece" />
-            <Piece piece="pawn_w" v-if="piece === 'P'" class="piece" />
+            <KingWhite v-if="piece === 'K'" class="piece" />
+            <QueenWhite v-if="piece === 'Q'" class="piece" />
+            <RookWhite v-if="piece === 'R'" class="piece" />
+            <BishopWhite v-if="piece === 'B'" class="piece" />
+            <KnightWhite v-if="piece === 'N'" class="piece" />
+            <PawnWhite v-if="piece === 'P'" class="piece" />
             {{
               ['K', 'Q', 'R', 'B', 'N', 'P'].includes(piece)
                 ? squares.join(' ')
@@ -27,12 +27,12 @@
         </ul>
         <ul>
           <li v-for="(squares, piece) in activePuzzle.positions" :key="piece">
-            <Piece piece="king_b" v-if="piece === 'k'" class="piece" />
-            <Piece piece="queen_b" v-if="piece === 'q'" class="piece" />
-            <Piece piece="rook_b" v-if="piece === 'r'" class="piece" />
-            <Piece piece="bishop_b" v-if="piece === 'b'" class="piece" />
-            <Piece piece="knight_b" v-if="piece === 'n'" class="piece" />
-            <Piece piece="pawn_b" v-if="piece === 'p'" class="piece" />
+            <KingBlack v-if="piece === 'k'" class="piece" />
+            <QueenBlack v-if="piece === 'q'" class="piece" />
+            <RookBlack v-if="piece === 'r'" class="piece" />
+            <BishopBlack v-if="piece === 'b'" class="piece" />
+            <KnightBlack v-if="piece === 'n'" class="piece" />
+            <PawnBlack v-if="piece === 'p'" class="piece" />
             {{
               ['k', 'q', 'r', 'b', 'n', 'p'].includes(piece)
                 ? squares.join(' ')
@@ -46,12 +46,34 @@
 </template>
 
 <script>
-import Piece from './Piece.vue';
+import KingBlack from '../../public/pieces/king_b.svg';
+import KingWhite from '../../public/pieces/king_w.svg';
+import QueenBlack from '../../public/pieces/queen_b.svg';
+import QueenWhite from '../../public/pieces/queen_w.svg';
+import RookBlack from '../../public/pieces/rook_b.svg';
+import RookWhite from '../../public/pieces/rook_w.svg';
+import BishopBlack from '../../public/pieces/bishop_b.svg';
+import BishopWhite from '../../public/pieces/bishop_w.svg';
+import KnightBlack from '../../public/pieces/knight_b.svg';
+import KnightWhite from '../../public/pieces/knight_w.svg';
+import PawnBlack from '../../public/pieces/pawn_b.svg';
+import PawnWhite from '../../public/pieces/pawn_w.svg';
 
 export default {
   name: 'Puzzle',
   components: {
-    Piece,
+    KingBlack,
+    KingWhite,
+    QueenBlack,
+    QueenWhite,
+    RookBlack,
+    RookWhite,
+    BishopBlack,
+    BishopWhite,
+    KnightBlack,
+    KnightWhite,
+    PawnBlack,
+    PawnWhite,
   },
   computed: {
     activePuzzle() {
