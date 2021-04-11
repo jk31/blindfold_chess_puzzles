@@ -8,4 +8,5 @@
 * How solution input? Full notation (Qxd8+) or simple (Qd8)
   just simple regex? filter out x + # ?
 * if no puzzles from bilder show conditional error
+  maybe not needed if enogh data
 

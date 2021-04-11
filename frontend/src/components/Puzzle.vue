@@ -1,5 +1,5 @@
 <template>
-  <div id="puzzle">
+  <div id="puzzle" class="mb-3">
     <v-card elevation="2">
       <v-card-title class="mb-3"
         ><b>{{ activePlayer }} to move.</b></v-card-title

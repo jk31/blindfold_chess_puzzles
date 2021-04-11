@@ -11,9 +11,9 @@
                 <v-col class="px-4">
                   <v-range-slider
                     v-model="ratingRange"
-                    :max="ratingMax"
-                    :min="ratingMin"
-                    step="50"
+                    :max="3000"
+                    :min="400"
+                    step="100"
                     hide-details
                     class="align-center"
                   >
@@ -52,8 +52,8 @@
                 <v-col class="px-4">
                   <v-range-slider
                     v-model="numberOfPiecesRange"
-                    :max="numberOfPiecesMax"
-                    :min="numberOfPiecesMin"
+                    :max="32"
+                    :min="3"
                     hide-details
                     class="align-center"
                   >
@@ -88,15 +88,13 @@
       </v-expansion-panel>
     </v-expansion-panels>
 
-    <v-btn block color="success" class="my-3" @click="playPuzzle"
+    <v-btn block color="success" class="my-3" elevation="2" @click="playPuzzle"
       >Play a Puzzle</v-btn
     >
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex';
-
 export default {
   name: 'Test',
   data() {
@@ -105,12 +103,6 @@ export default {
     };
   },
   computed: {
-    ...mapState('puzzles', [
-      'ratingMin',
-      'ratingMax',
-      'numberOfPiecesMin',
-      'numberOfPiecesMax',
-    ]),
     ratingRange: {
       get() {
         return this.$store.state.puzzles.ratingRange;
