@@ -43,15 +43,5 @@ export default {
       commit('updateActivePuzzle', activePuzzle);
     },
   },
-  getters: {
-    filteredPuzzles: (state) => {
-      return state.puzzles.filter(
-        (puzzle) =>
-          puzzle.rating > state.ratingRange[0] &&
-          puzzle.rating < state.ratingRange[1] &&
-          puzzle.number_of_pieces > state.numberOfPiecesRange[0] &&
-          puzzle.number_of_pieces < state.numberOfPiecesRange[1]
-      );
-    },
-  },
+  getters: {},
 };

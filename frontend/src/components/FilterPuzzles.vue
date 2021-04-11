@@ -88,7 +88,7 @@
       </v-expansion-panel>
     </v-expansion-panels>
 
-    <v-btn block color="success" class="mt-3" @click="playPuzzle"
+    <v-btn block color="success" class="my-3" @click="playPuzzle"
       >Play a Puzzle</v-btn
     >
   </div>
