@@ -33,10 +33,10 @@ export default {
     getRandomPuzzleFromFilteredPuzzles({ state, commit }) {
       let filteredPuzzles = state.puzzles.filter(
         (puzzle) =>
-          puzzle.rating > state.ratingRange[0] &&
-          puzzle.rating < state.ratingRange[1] &&
-          puzzle.number_of_pieces > state.numberOfPiecesRange[0] &&
-          puzzle.number_of_pieces < state.numberOfPiecesRange[1]
+          puzzle.rating >= state.ratingRange[0] &&
+          puzzle.rating <= state.ratingRange[1] &&
+          puzzle.number_of_pieces >= state.numberOfPiecesRange[0] &&
+          puzzle.number_of_pieces <= state.numberOfPiecesRange[1]
       );
       let activePuzzle =
         filteredPuzzles[Math.floor(Math.random() * filteredPuzzles.length)];
