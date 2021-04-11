@@ -9,22 +9,35 @@
         {{ castling }}
         {{ enPassant }}
       </v-card-subtitle>
-      <v-card-text>
+      <v-card-text class="d-sm-flex justify-space-around">
+        <ul>
+          <li v-for="(squares, piece) in activePuzzle.positions" :key="piece">
+            <Piece piece="king_w" v-if="piece === 'K'" class="piece" />
+            <Piece piece="queen_w" v-if="piece === 'Q'" class="piece" />
+            <Piece piece="rook_w" v-if="piece === 'R'" class="piece" />
+            <Piece piece="bishop_w" v-if="piece === 'B'" class="piece" />
+            <Piece piece="knight_w" v-if="piece === 'N'" class="piece" />
+            <Piece piece="pawn_w" v-if="piece === 'P'" class="piece" />
+            {{
+              ['K', 'Q', 'R', 'B', 'N', 'P'].includes(piece)
+                ? squares.join(' ')
+                : ''
+            }}
+          </li>
+        </ul>
         <ul>
           <li v-for="(squares, piece) in activePuzzle.positions" :key="piece">
             <Piece piece="king_b" v-if="piece === 'k'" class="piece" />
-            <Piece piece="king_w" v-if="piece === 'K'" class="piece" />
             <Piece piece="queen_b" v-if="piece === 'q'" class="piece" />
-            <Piece piece="queen_w" v-if="piece === 'Q'" class="piece" />
             <Piece piece="rook_b" v-if="piece === 'r'" class="piece" />
-            <Piece piece="rook_w" v-if="piece === 'R'" class="piece" />
             <Piece piece="bishop_b" v-if="piece === 'b'" class="piece" />
-            <Piece piece="bishop_w" v-if="piece === 'B'" class="piece" />
             <Piece piece="knight_b" v-if="piece === 'n'" class="piece" />
-            <Piece piece="knight_w" v-if="piece === 'N'" class="piece" />
             <Piece piece="pawn_b" v-if="piece === 'p'" class="piece" />
-            <Piece piece="pawn_w" v-if="piece === 'P'" class="piece" />
-            {{ squares.join(' ') }}
+            {{
+              ['k', 'q', 'r', 'b', 'n', 'p'].includes(piece)
+                ? squares.join(' ')
+                : ''
+            }}
           </li>
         </ul>
       </v-card-text>
