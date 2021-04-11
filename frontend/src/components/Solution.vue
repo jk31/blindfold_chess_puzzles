@@ -7,62 +7,74 @@
         <v-container
           class="grey lighten-5 d-flex align-center justify-space-around"
         >
-          <KingWhite
+          <Piece
+            piece="king_w"
             v-if="activePlayer === 'White'"
             class="piece"
-            @click="pieceClick('K', $event)"
+            @click.native="pieceClick('K', $event)"
           />
-          <QueenWhite
+          <Piece
+            piece="queen_w"
             v-if="activePlayer === 'White'"
             class="piece"
             @click="pieceClick('Q')"
           />
-          <RookWhite
+          <Piece
+            piece="rook_w"
             v-if="activePlayer === 'White'"
             class="piece"
             @click="pieceClick('R')"
           />
-          <BishopWhite
+          <Piece
+            piece="bishop_w"
             v-if="activePlayer === 'White'"
             class="piece"
             @click="pieceClick('B')"
           />
-          <KnightWhite
+          <Piece
+            piece="knight_w"
             v-if="activePlayer === 'White'"
             class="piece"
             @click="pieceClick('N')"
           />
-          <PawnWhite
+          <Piece
+            piece="pawn_w"
             v-if="activePlayer === 'White'"
             class="piece"
             @click="pieceClick('P')"
           />
-          <KingBlack
+          <Piece
+            piece="king_b"
             v-if="activePlayer === 'Black'"
             class="piece"
             @click="pieceClick('K')"
           />
-          <QueenBlack
+          <Piece
+            piece="queen_b"
             v-if="activePlayer === 'Black'"
             class="piece"
             @click="pieceClick('Q')"
           />
-          <RookBlack
+          <Piece
+            piece="rook_b"
             v-if="activePlayer === 'Black'"
             class="piece"
             @click="pieceClick('R')"
           />
-          <BishopBlack
+          <Piece
+            piece="bishop_b"
             v-if="activePlayer === 'Black'"
             class="piece"
             @click="pieceClick('B')"
           />
-          <KnightBlack
+          <Piece
+            piece="knight_b"
             v-if="activePlayer === 'Black'"
             class="piece"
             @click="pieceClick('N')"
           />
-          <PawnBlack
+          <Piece
+            piece="pawn_b"
             v-if="activePlayer === 'Black'"
             class="piece"
             @click="pieceClick('P')"
@@ -76,34 +88,12 @@
 </template>
 
 <script>
-import KingBlack from '../../public/pieces/king_b.svg';
-import KingWhite from '../../public/pieces/king_w.svg';
-import QueenBlack from '../../public/pieces/queen_b.svg';
-import QueenWhite from '../../public/pieces/queen_w.svg';
-import RookBlack from '../../public/pieces/rook_b.svg';
-import RookWhite from '../../public/pieces/rook_w.svg';
-import BishopBlack from '../../public/pieces/bishop_b.svg';
-import BishopWhite from '../../public/pieces/bishop_w.svg';
-import KnightBlack from '../../public/pieces/knight_b.svg';
-import KnightWhite from '../../public/pieces/knight_w.svg';
-import PawnBlack from '../../public/pieces/pawn_b.svg';
-import PawnWhite from '../../public/pieces/pawn_w.svg';
+import Piece from './Piece.vue';
 
 export default {
   name: 'Solution',
   components: {
-    KingBlack,
-    KingWhite,
-    QueenBlack,
-    QueenWhite,
-    RookBlack,
-    RookWhite,
-    BishopBlack,
-    BishopWhite,
-    KnightBlack,
-    KnightWhite,
-    PawnBlack,
-    PawnWhite,
+    Piece,
   },
   computed: {
     activePlayer() {
@@ -123,7 +113,7 @@ export default {
     pieceClick(piece, event) {
       console.log(piece);
       console.log(event);
-      event.target.parentElement.classList.toggle('selected-piece');
+      event.target.classList.toggle('selected-piece');
     },
   },
 };
@@ -136,6 +126,6 @@ export default {
 }
 
 .selected-piece {
-  transform: scale(1.2);
+  border: 1px solid rgb(76, 175, 80);
 }
 </style>
