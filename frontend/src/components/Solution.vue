@@ -2,7 +2,7 @@
   <div id="solution">
     <v-card elevation="2">
       <v-card-title class="mb-3">{{ activePlayer }}'s next move.</v-card-title>
-      <!-- <v-card-subtitle>Solution subtitle</v-card-subtitle> -->
+      <v-card-subtitle>{{ solutionPiece }}</v-card-subtitle>
       <v-card-text>
         <v-container
           class="grey lighten-5 d-flex align-center justify-space-around"
@@ -17,68 +17,89 @@
             piece="queen_w"
             v-if="activePlayer === 'White'"
             class="piece"
-            @click="pieceClick('Q')"
+            @click.native="pieceClick('Q', $event)"
           />
           <Piece
             piece="rook_w"
             v-if="activePlayer === 'White'"
             class="piece"
-            @click="pieceClick('R')"
+            @click.native="pieceClick('R', $event)"
           />
           <Piece
             piece="bishop_w"
             v-if="activePlayer === 'White'"
             class="piece"
-            @click="pieceClick('B')"
+            @click.native="pieceClick('B', $event)"
           />
           <Piece
             piece="knight_w"
             v-if="activePlayer === 'White'"
             class="piece"
-            @click="pieceClick('N')"
+            @click.native="pieceClick('N', $event)"
           />
           <Piece
             piece="pawn_w"
             v-if="activePlayer === 'White'"
             class="piece"
-            @click="pieceClick('P')"
+            @click.native="pieceClick('P', $event)"
           />
           <Piece
             piece="king_b"
             v-if="activePlayer === 'Black'"
             class="piece"
-            @click="pieceClick('K')"
+            @click.native="pieceClick('K', $event)"
           />
           <Piece
             piece="queen_b"
             v-if="activePlayer === 'Black'"
             class="piece"
-            @click="pieceClick('Q')"
+            @click.native="pieceClick('Q', $event)"
           />
           <Piece
             piece="rook_b"
             v-if="activePlayer === 'Black'"
             class="piece"
-            @click="pieceClick('R')"
+            @click.native="pieceClick('R', $event)"
           />
           <Piece
             piece="bishop_b"
             v-if="activePlayer === 'Black'"
             class="piece"
-            @click="pieceClick('B')"
+            @click.native="pieceClick('B', $event)"
           />
           <Piece
             piece="knight_b"
             v-if="activePlayer === 'Black'"
             class="piece"
-            @click="pieceClick('N')"
+            @click.native="pieceClick('N', $event)"
           />
           <Piece
             piece="pawn_b"
             v-if="activePlayer === 'Black'"
             class="piece"
-            @click="pieceClick('P')"
+            @click.native="pieceClick('P', $event)"
           />
+        </v-container>
+        <v-container fluid>
+          <v-radio-group v-model="radios" :column="false" }>
+            <v-radio value="Google">
+              <template v-slot:label>
+                <Piece
+                  piece="king_w"
+                  v-if="activePlayer === 'White'"
+                  class="piece mx-2"
+                  @click.native="pieceClick('K', $event)"
+                />
+              </template>
+            </v-radio>
+            <v-radio value="Duckduckgo">
+              <template v-slot:label>
+                <div>
+                  Definitely <strong class="primary--text">Duckduckgo</strong>
+                </div>
+              </template>
+            </v-radio>
+          </v-radio-group>
         </v-container>
         <v-btn color="primary" class="my-3">Check your move</v-btn>
       </v-card-text>
@@ -94,6 +115,14 @@ export default {
   name: 'Solution',
   components: {
     Piece,
+  },
+  data() {
+    return {
+      solutionPiece: '',
+      solutionFile: '',
+      solutionRank: '',
+      radios: 'Duckduckgo',
+    };
   },
   computed: {
     activePlayer() {
@@ -111,8 +140,8 @@ export default {
   },
   methods: {
     pieceClick(piece, event) {
+      this.solutionPiece = piece;
       console.log(piece);
-      console.log(event);
       event.target.classList.toggle('selected-piece');
     },
   },
@@ -122,6 +151,7 @@ export default {
 <style scoped>
 .piece {
   transform: scale(1.1);
+  border: 1px solid white;
   cursor: pointer;
 }
 
