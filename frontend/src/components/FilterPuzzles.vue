@@ -88,7 +88,9 @@
       </v-expansion-panel>
     </v-expansion-panels>
 
-    <v-btn block color="success" class="mt-3">Play a Puzzle</v-btn>
+    <v-btn block color="success" class="mt-3" @click="playPuzzle"
+      >Play a Puzzle</v-btn
+    >
   </div>
 </template>
 
@@ -127,6 +129,12 @@ export default {
       set(range) {
         this.$store.commit('puzzles/updateNumberOfPiecesRange', range);
       },
+    },
+  },
+  methods: {
+    playPuzzle() {
+      this.openedPanel = [];
+      this.$store.dispatch('puzzles/getRandomPuzzleFromFilteredPuzzles');
     },
   },
 };
