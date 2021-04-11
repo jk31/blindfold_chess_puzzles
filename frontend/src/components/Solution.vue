@@ -1,13 +1,118 @@
 <template>
   <div id="solution">
     <v-card elevation="2">
-      <v-card-title class="mb-3">{{ activePlayer }}'s next move.</v-card-title>
-      <v-card-subtitle>{{ solutionPiece }}</v-card-subtitle>
+      <v-card-title class="mb-3"
+        >{{ activePlayer }}'s next move: {{ solutionPiece }}
+      </v-card-title>
+      <!-- <v-card-subtitle></v-card-subtitle> -->
       <v-card-text>
         <v-container
           class="grey lighten-5 d-flex align-center justify-space-around"
         >
-          <Piece
+          <v-item-group v-model="solutionPiece">
+            <div v-if="activePlayer === 'White'">
+              <v-item v-slot="{ active, toggle }">
+                <Piece
+                  piece="king_w"
+                  class="piece"
+                  :class="{ active: active }"
+                  @click.native="toggle"
+                />
+              </v-item>
+              <v-item v-slot="{ active, toggle }">
+                <Piece
+                  piece="queen_w"
+                  class="piece"
+                  :class="{ active: active }"
+                  @click.native="toggle"
+                />
+              </v-item>
+              <v-item v-slot="{ active, toggle }">
+                <Piece
+                  piece="rook_w"
+                  class="piece"
+                  :class="{ active: active }"
+                  @click.native="toggle"
+                />
+              </v-item>
+              <v-item v-slot="{ active, toggle }">
+                <Piece
+                  piece="bishop_w"
+                  class="piece"
+                  :class="{ active: active }"
+                  @click.native="toggle"
+                />
+              </v-item>
+              <v-item v-slot="{ active, toggle }">
+                <Piece
+                  piece="knight_w"
+                  class="piece"
+                  :class="{ active: active }"
+                  @click.native="toggle"
+                />
+              </v-item>
+              <v-item v-slot="{ active, toggle }">
+                <Piece
+                  piece="pawn_w"
+                  class="piece"
+                  :class="{ active: active }"
+                  @click.native="toggle"
+                />
+              </v-item>
+            </div>
+
+            <div v-if="activePlayer === 'Black'">
+              <v-item v-slot="{ active, toggle }">
+                <Piece
+                  piece="king_b"
+                  class="piece"
+                  :class="{ active: active }"
+                  @click.native="toggle"
+                />
+              </v-item>
+              <v-item v-slot="{ active, toggle }">
+                <Piece
+                  piece="queen_b"
+                  class="piece"
+                  :class="{ active: active }"
+                  @click.native="toggle"
+                />
+              </v-item>
+              <v-item v-slot="{ active, toggle }">
+                <Piece
+                  piece="rook_b"
+                  class="piece"
+                  :class="{ active: active }"
+                  @click.native="toggle"
+                />
+              </v-item>
+              <v-item v-slot="{ active, toggle }">
+                <Piece
+                  piece="bishop_b"
+                  class="piece"
+                  :class="{ active: active }"
+                  @click.native="toggle"
+                />
+              </v-item>
+              <v-item v-slot="{ active, toggle }">
+                <Piece
+                  piece="knight_b"
+                  class="piece"
+                  :class="{ active: active }"
+                  @click.native="toggle"
+                />
+              </v-item>
+              <v-item v-slot="{ active, toggle }">
+                <Piece
+                  piece="pawn_b"
+                  class="piece"
+                  :class="{ active: active }"
+                  @click.native="toggle"
+                />
+              </v-item>
+            </div>
+          </v-item-group>
+          <!-- <Piece
             piece="king_w"
             v-if="activePlayer === 'White'"
             class="piece"
@@ -77,29 +182,8 @@
             piece="pawn_b"
             v-if="activePlayer === 'Black'"
             class="piece"
-            @click.native="pieceClick('P', $event)"
-          />
-        </v-container>
-        <v-container fluid>
-          <v-radio-group v-model="radios" :column="false" }>
-            <v-radio value="Google">
-              <template v-slot:label>
-                <Piece
-                  piece="king_w"
-                  v-if="activePlayer === 'White'"
-                  class="piece mx-2"
-                  @click.native="pieceClick('K', $event)"
-                />
-              </template>
-            </v-radio>
-            <v-radio value="Duckduckgo">
-              <template v-slot:label>
-                <div>
-                  Definitely <strong class="primary--text">Duckduckgo</strong>
-                </div>
-              </template>
-            </v-radio>
-          </v-radio-group>
+            @click.native="pieceClick('P', $event)" 
+          />-->
         </v-container>
         <v-btn color="primary" class="my-3">Check your move</v-btn>
       </v-card-text>
@@ -118,7 +202,7 @@ export default {
   },
   data() {
     return {
-      solutionPiece: '',
+      solutionPiece: [],
       solutionFile: '',
       solutionRank: '',
       radios: 'Duckduckgo',
@@ -156,6 +240,10 @@ export default {
 }
 
 .selected-piece {
+  border: 1px solid rgb(76, 175, 80);
+}
+
+.active {
   border: 1px solid rgb(76, 175, 80);
 }
 </style>
