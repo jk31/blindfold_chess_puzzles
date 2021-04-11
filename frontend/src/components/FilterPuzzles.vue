@@ -99,9 +99,6 @@ import { mapState } from 'vuex';
 
 export default {
   name: 'Test',
-  created() {
-    this.$store.dispatch('puzzles/loadPuzzles');
-  },
   data() {
     return {
       openedPanel: [0],

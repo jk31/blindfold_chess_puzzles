@@ -1,22 +1,14 @@
 <template>
   <div id="puzzle">
     <v-card elevation="2">
-      <v-card-title class="mb-3">Puzzle Position</v-card-title>
-      <v-card-subtitle
-        >{{ activePuzzle.active === 'w' ? 'Black' : 'White' }} played
-        {{ activePuzzle.moves_alg[0] }}.<br />
-        {{ activePuzzle.active === 'w' ? 'White' : 'Black' }} to move.
-        {{
-          activePuzzle.castling === '-'
-            ? ''
-            : `Castling: ${activePuzzle.castling}.`
-        }}
-        {{
-          activePuzzle.enpassant === '-'
-            ? ''
-            : `En passant square: ${activePuzzle.enpassant}.`
-        }}</v-card-subtitle
+      <v-card-title class="mb-3"
+        ><b>{{ activePlayer }} to move.</b></v-card-title
       >
+      <v-card-subtitle
+        >{{ inactivePlayer }} played {{ activePuzzle.moves_alg[0] }}.
+        {{ castling }}
+        {{ enPassant }}
+      </v-card-subtitle>
       <v-card-text>
         <ul>
           <li v-for="(squares, piece) in activePuzzle.positions" :key="piece">
@@ -37,7 +29,6 @@
         </ul>
       </v-card-text>
     </v-card>
-    {{ activePuzzle.positions }}
   </div>
 </template>
 
@@ -74,6 +65,26 @@ export default {
   computed: {
     activePuzzle() {
       return this.$store.state.puzzles.activePuzzle;
+    },
+    activePlayer() {
+      return this.activePuzzle.active === 'w' ? 'White' : 'Black';
+    },
+    inactivePlayer() {
+      return this.activePuzzle.active === 'w' ? 'Black' : 'White';
+    },
+    castling() {
+      let cast = this.activePuzzle.castling;
+      return cast === '-'
+        ? ''
+        : `Castling possible: ${cast.includes('K') ? 'White kingside. ' : ''}${
+            cast.includes('Q') ? 'White queenside. ' : ''
+          }${cast.includes('k') ? 'Black kingside. ' : ''}${
+            cast.includes('q') ? 'Black queenside. ' : ''
+          }`;
+    },
+    enPassant() {
+      let en = this.activePuzzle.enpassant;
+      return en === '-' ? '' : `En passant square: ${en}.`;
     },
   },
 };

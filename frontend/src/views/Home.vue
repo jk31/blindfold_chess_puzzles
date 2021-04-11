@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <FilterPuzzles />
-    <Puzzle />
+    <Puzzle v-if="$store.state.puzzles.activePuzzle != {}" />
   </div>
 </template>
 
@@ -14,6 +14,9 @@ export default {
   components: {
     FilterPuzzles,
     Puzzle,
+  },
+  created() {
+    this.$store.dispatch('puzzles/loadPuzzles');
   },
 };
 </script>
