@@ -9,4 +9,5 @@
   just simple regex? filter out x + # ?
 * if no puzzles from bilder show conditional error
   maybe not needed if enogh data
+* scroll to solution after show solution click
 

@@ -1,9 +1,7 @@
 <template>
   <div id="puzzle" class="mb-3">
     <v-card elevation="2">
-      <v-card-title class="mb-3"
-        ><b>{{ activePlayer }} to move</b></v-card-title
-      >
+      <v-card-title class="mb-3">{{ activePlayer }} to move</v-card-title>
       <v-card-subtitle
         >{{ inactivePlayer }} played {{ activePuzzle.moves_alg[0] }}.
         {{ castling }}
@@ -46,6 +44,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 import KingBlack from '../../public/pieces/king_b.svg';
 import KingWhite from '../../public/pieces/king_w.svg';
 import QueenBlack from '../../public/pieces/queen_b.svg';
@@ -76,29 +76,13 @@ export default {
     PawnWhite,
   },
   computed: {
-    activePuzzle() {
-      return this.$store.state.puzzles.activePuzzle;
-    },
-    activePlayer() {
-      return this.activePuzzle.active === 'w' ? 'White' : 'Black';
-    },
-    inactivePlayer() {
-      return this.activePuzzle.active === 'w' ? 'Black' : 'White';
-    },
-    castling() {
-      let cast = this.activePuzzle.castling;
-      return cast === '-'
-        ? ''
-        : `Castling possible: ${cast.includes('K') ? 'White kingside. ' : ''}${
-            cast.includes('Q') ? 'White queenside. ' : ''
-          }${cast.includes('k') ? 'Black kingside. ' : ''}${
-            cast.includes('q') ? 'Black queenside. ' : ''
-          }`;
-    },
-    enPassant() {
-      let en = this.activePuzzle.enpassant;
-      return en === '-' ? '' : `En passant square: ${en}.`;
-    },
+    ...mapGetters('puzzles', [
+      'activePuzzle',
+      'activePlayer',
+      'inactivePlayer',
+      'castling',
+      'enPassant',
+    ]),
   },
 };
 </script>

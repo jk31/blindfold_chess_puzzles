@@ -2,13 +2,17 @@
   <div class="home">
     <FilterPuzzles />
     <Puzzle v-if="activePuzzleExists" />
-    <Solution v-if="activePuzzleExists" />
+    <PlayerGuesses v-if="activePuzzleExists" />
+    <Solution v-if="solutionVisible" />
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 import FilterPuzzles from '@/components/FilterPuzzles.vue';
 import Puzzle from '@/components/Puzzle.vue';
+import PlayerGuesses from '@/components/PlayerGuesses.vue';
 import Solution from '@/components/Solution.vue';
 
 export default {
@@ -16,15 +20,14 @@ export default {
   components: {
     FilterPuzzles,
     Puzzle,
+    PlayerGuesses,
     Solution,
   },
   created() {
     this.$store.dispatch('puzzles/loadPuzzles');
   },
   computed: {
-    activePuzzleExists() {
-      return this.$store.state.puzzles.activePuzzleExists;
-    },
+    ...mapGetters('puzzles', ['activePuzzleExists', 'solutionVisible']),
   },
 };
 </script>

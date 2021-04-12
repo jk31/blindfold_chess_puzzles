@@ -1,6 +1,6 @@
 <template>
   <div id="filter">
-    <v-expansion-panels v-model="openedPanel" multiple>
+    <v-expansion-panels v-model="openedFilterPanel" multiple>
       <v-expansion-panel>
         <v-expansion-panel-header> Puzzle Setings </v-expansion-panel-header>
         <v-expansion-panel-content>
@@ -97,11 +97,6 @@
 <script>
 export default {
   name: 'Test',
-  data() {
-    return {
-      openedPanel: [0],
-    };
-  },
   computed: {
     ratingRange: {
       get() {
@@ -109,6 +104,14 @@ export default {
       },
       set(range) {
         this.$store.commit('puzzles/updateRatingRange', range);
+      },
+    },
+    openedFilterPanel: {
+      get() {
+        return this.$store.state.puzzles.openedFilterPanel;
+      },
+      set() {
+        this.$store.commit('puzzles/updateOpenedFilterPanel');
       },
     },
     numberOfPiecesRange: {
@@ -122,7 +125,7 @@ export default {
   },
   methods: {
     playPuzzle() {
-      this.openedPanel = [];
+      this.$store.commit('puzzles/closeOpenedFilterPanel');
       this.$store.dispatch('puzzles/getRandomPuzzleFromFilteredPuzzles');
     },
   },

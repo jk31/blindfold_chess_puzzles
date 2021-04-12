@@ -1,6 +1,9 @@
 export default {
   namespaced: true,
   state: {
+    openedFilterPanel: [0],
+    ratingRange: [800, 1500],
+    numberOfPiecesRange: [4, 7],
     puzzles: [],
     activePuzzleExists: false,
     activePuzzle: {
@@ -26,11 +29,21 @@ export default {
       id: 169,
     },
     solutionVisible: false,
-    puzzleHistory: {},
-    ratingRange: [800, 1500],
-    numberOfPiecesRange: [4, 7],
+    playerSolution: '',
+    playerCorrect: 0,
+    playerWrongAnswers: [],
   },
   mutations: {
+    updateOpenedFilterPanel(state) {
+      if (state.openedFilterPanel[0] === 0) {
+        state.openedFilterPanel = [];
+      } else {
+        state.openedFilterPanel = [0];
+      }
+    },
+    closeOpenedFilterPanel(state) {
+      state.openedFilterPanel = [];
+    },
     updatePuzzles(state, payload) {
       state.puzzles = payload.puzzles;
     },
@@ -46,6 +59,21 @@ export default {
     },
     updateSolutionVisible(state, payload) {
       state.solutionVisible = payload;
+    },
+    cleanPlayerWrongAnswers(state) {
+      state.playerWrongAnswers = [];
+    },
+    pushPlayerWrongAnswers(state, payload) {
+      state.playerWrongAnswers.push(payload);
+    },
+    updatePlayerSolution(state, payload) {
+      state.playerSolution = payload;
+    },
+    increasePlayerCorrect(state, payload) {
+      state.playerCorrect += payload;
+    },
+    cleanPlayerCorrect(state) {
+      state.playerCorrect = 0;
     },
   },
   actions: {
@@ -65,7 +93,58 @@ export default {
         filteredPuzzles[Math.floor(Math.random() * filteredPuzzles.length)];
       commit('updateSolutionVisible', false);
       commit('updateActivePuzzle', activePuzzle);
+      commit('cleanPlayerWrongAnswers');
+      commit('updatePlayerSolution', '');
+      commit('cleanPlayerCorrect');
     },
   },
-  getters: {},
+  getters: {
+    activePuzzle: (state) => {
+      return state.activePuzzle;
+    },
+    activePuzzleExists: (state) => {
+      return state.activePuzzleExists;
+    },
+    activePlayer: (state) => {
+      return state.activePuzzle.active === 'w' ? 'White' : 'Black';
+    },
+    inactivePlayer: (state) => {
+      return state.activePuzzle.active === 'w' ? 'Black' : 'White';
+    },
+    castling: (state) => {
+      let cast = state.activePuzzle.castling;
+      return cast === '-'
+        ? ''
+        : `Castling possible: ${cast.includes('K') ? 'White kingside. ' : ''}${
+            cast.includes('Q') ? 'White queenside. ' : ''
+          }${cast.includes('k') ? 'Black kingside. ' : ''}${
+            cast.includes('q') ? 'Black queenside. ' : ''
+          }`;
+    },
+    enPassant: (state) => {
+      let en = state.activePuzzle.enpassant;
+      return en === '-' ? '' : `En passant square: ${en}.`;
+    },
+    solutionVisible: (state) => {
+      return state.solutionVisible;
+    },
+    solution: (state) => {
+      return state.activePuzzle.moves_alg.slice(1);
+    },
+    solutionPlayerPart: (state) => {
+      return state.activePuzzle.moves_alg.slice(1).filter((v, i) => !(i % 2));
+    },
+    solutionOpponentPart: (state) => {
+      return state.activePuzzle.moves_alg.slice(1).filter((v, i) => i % 2);
+    },
+    playerSolution: (state) => {
+      return state.playerSolution;
+    },
+    playerCorrect: (state) => {
+      return state.playerCorrect;
+    },
+    playerWrongAnswers: (state) => {
+      return state.playerWrongAnswers;
+    },
+  },
 };
