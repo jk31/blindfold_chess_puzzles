@@ -1,5 +1,5 @@
 <template>
-  <v-card elevation="2">
+  <v-card elevation="2" id="solution">
     <v-card-title class="mb-3"
       >Solution including opponent's moves:
     </v-card-title>

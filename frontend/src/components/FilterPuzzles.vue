@@ -128,6 +128,14 @@ export default {
       this.$store.commit('puzzles/closeOpenedFilterPanel');
       this.$store.commit('puzzles/updatePuzzleSolved', false);
       this.$store.dispatch('puzzles/getRandomPuzzleFromFilteredPuzzles');
+
+      this.$nextTick(() => {
+        this.$vuetify.goTo('#playerGuesses', {
+          duration: 1000,
+          offset: 0,
+          easing: 'easeInCubic',
+        });
+      });
     },
   },
 };

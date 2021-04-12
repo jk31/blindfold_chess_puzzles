@@ -1,8 +1,8 @@
 <template>
-  <div id="solution">
+  <div id="playerGuesses">
     <v-card elevation="2" class="mb-3">
       <v-card-title v-if="!puzzleSolved"
-        >{{ activePlayer }}'s next move {{ solution }}</v-card-title
+        >{{ activePlayer }}'s next move</v-card-title
       >
       <v-card-title v-if="puzzleSolved">Puzzle solved! &#128170;</v-card-title>
 
@@ -12,7 +12,6 @@
             v-model="playerSolution"
             label="Algebraic notation"
             placeholder="Qxh7#"
-            filled
             autocomplete="off"
             clearable
             style="width: 200px"
@@ -137,14 +136,37 @@ export default {
 
       // clean input field
       this.$store.commit('puzzles/updatePlayerSolution', '');
+
+      this.$nextTick(() => {
+        this.$vuetify.goTo('#playerGuesses', {
+          duration: 500,
+          offset: 0,
+          easing: 'easeInCubic',
+        });
+      });
     },
     showSolution() {
       this.$store.commit('puzzles/updateSolutionVisible', true);
+      this.$nextTick(() => {
+        this.$vuetify.goTo('#solution', {
+          duration: 1000,
+          offset: 0,
+          easing: 'easeInCubic',
+        });
+      });
     },
     playPuzzle() {
       this.$store.commit('puzzles/closeOpenedFilterPanel');
       this.$store.commit('puzzles/updatePuzzleSolved', false);
       this.$store.dispatch('puzzles/getRandomPuzzleFromFilteredPuzzles');
+
+      this.$nextTick(() => {
+        this.$vuetify.goTo('#playerGuesses', {
+          duration: 1000,
+          offset: 0,
+          easing: 'easeInCubic',
+        });
+      });
     },
   },
 };
