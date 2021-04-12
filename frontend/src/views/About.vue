@@ -33,6 +33,7 @@
             <div class="py-4">
               <h2 class="mb-3">v.0.2 - Potential Features</h2>
               <ul>
+                <li>Larger number of pieces range</li>
                 <li>(interactive) Board in the solution</li>
                 <li>Design improvements</li>
                 <li>More puzzles</li>

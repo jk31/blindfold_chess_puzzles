@@ -7,13 +7,14 @@
       <v-card-title v-if="puzzleSolved">Puzzle solved! &#128170;</v-card-title>
 
       <div v-if="!puzzleSolved">
-        <v-card-text>
+        <v-card-text style="padding-top: 0px">
           <v-text-field
             v-model="playerSolution"
             label="Algebraic notation"
             placeholder="Qxh7#"
             autocomplete="off"
             clearable
+            :disabled="solutionVisible"
             style="width: 200px"
             @keyup.enter="checkSolution"
           ></v-text-field
@@ -161,7 +162,7 @@ export default {
 
       if (this.activePuzzleExists) {
         this.$nextTick(() => {
-          this.$vuetify.goTo('#playerGuesses', {
+          this.$vuetify.goTo('#puzzle', {
             duration: 1000,
             offset: 0,
             easing: 'easeInCubic',

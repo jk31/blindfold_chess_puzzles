@@ -12,7 +12,7 @@
                   <v-range-slider
                     v-model="ratingRange"
                     :max="3000"
-                    :min="400"
+                    :min="500"
                     step="100"
                     hide-details
                     class="align-center"
@@ -52,7 +52,7 @@
                 <v-col class="px-4">
                   <v-range-slider
                     v-model="numberOfPiecesRange"
-                    :max="32"
+                    :max="9"
                     :min="3"
                     hide-details
                     class="align-center"
@@ -142,7 +142,7 @@ export default {
 
       if (this.activePuzzleExists) {
         this.$nextTick(() => {
-          this.$vuetify.goTo('#playerGuesses', {
+          this.$vuetify.goTo('#puzzle', {
             duration: 1000,
             offset: 0,
             easing: 'easeInCubic',
