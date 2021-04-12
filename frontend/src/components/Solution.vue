@@ -5,9 +5,6 @@
     </v-card-title>
     <v-card-subtitle>{{ solution.join(' ') }}</v-card-subtitle>
     <v-card-text>
-      {{ solutionPlayerPart }} <br />
-      {{ solutionOpponentPart }}
-      <br />
       <v-btn
         :href="activePuzzle.gameurl"
         target="_blank"

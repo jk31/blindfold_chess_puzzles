@@ -126,6 +126,7 @@ export default {
   methods: {
     playPuzzle() {
       this.$store.commit('puzzles/closeOpenedFilterPanel');
+      this.$store.commit('puzzles/updatePuzzleSolved', false);
       this.$store.dispatch('puzzles/getRandomPuzzleFromFilteredPuzzles');
     },
   },

@@ -1,34 +1,40 @@
 <template>
   <div id="solution">
     <v-card elevation="2" class="mb-3">
-      <v-card-title class=""
+      <v-card-title v-if="!puzzleSolved"
         >{{ activePlayer }}'s next move {{ solution }}</v-card-title
       >
-      <v-card-text>
-        <v-text-field
-          v-model="playerSolution"
-          label="Algebraic notation"
-          placeholder="Qxh7#"
-          filled
-          autocomplete="off"
-          clearable
-          style="width: 200px"
-          @keyup.enter="checkSolution"
-        ></v-text-field
-        ><v-btn
-          color="primary"
-          class="mb-3 mr-3"
-          @click="checkSolution"
-          :disabled="playerSolution === '' || solutionVisible"
-          >Check Move</v-btn
-        ><v-btn
-          color="primary"
-          class="mb-3 mr-3"
-          @click="showSolution"
-          :disabled="solutionVisible"
-          >Show solution</v-btn
-        >
-      </v-card-text>
+      <v-card-title v-if="puzzleSolved">Puzzle solved! &#128170;</v-card-title>
+
+      <div v-if="!puzzleSolved">
+        <v-card-text>
+          <v-text-field
+            v-model="playerSolution"
+            label="Algebraic notation"
+            placeholder="Qxh7#"
+            filled
+            autocomplete="off"
+            clearable
+            style="width: 200px"
+            @keyup.enter="checkSolution"
+          ></v-text-field
+          ><v-btn
+            color="primary"
+            class="mb-3 mr-3"
+            @click="checkSolution"
+            :disabled="playerSolution === '' || solutionVisible"
+            style="width: 200px"
+            >Check Move</v-btn
+          ><v-btn
+            color="primary"
+            class="mb-3 mr-3"
+            @click="showSolution"
+            :disabled="solutionVisible"
+            style="width: 200px"
+            >Show solution</v-btn
+          >
+        </v-card-text>
+      </div>
 
       <div v-if="playerWrongAnswers.length > 0">
         <v-card-subtitle style="padding-top: 0px">Wrong moves</v-card-subtitle>
@@ -92,6 +98,7 @@ export default {
       'solutionOpponentPart',
       'playerCorrect',
       'playerWrongAnswers',
+      'puzzleSolved',
     ]),
     playerSolution: {
       get() {
@@ -104,6 +111,7 @@ export default {
   },
   methods: {
     checkSolution() {
+      // if no input stop
       if (this.playerSolution === '') {
         return;
       }
@@ -114,6 +122,8 @@ export default {
         if (this.solution.length == this.playerCorrect + 1) {
           // finished puzzle
           this.$store.commit('puzzles/increasePlayerCorrect', 1);
+          this.$store.commit('puzzles/updatePuzzleSolved', true);
+          this.showSolution();
         } else {
           // not finished puzzle -> add opponent move
           this.$store.commit('puzzles/increasePlayerCorrect', 2);
@@ -133,6 +143,7 @@ export default {
     },
     playPuzzle() {
       this.$store.commit('puzzles/closeOpenedFilterPanel');
+      this.$store.commit('puzzles/updatePuzzleSolved', false);
       this.$store.dispatch('puzzles/getRandomPuzzleFromFilteredPuzzles');
     },
   },

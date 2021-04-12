@@ -32,6 +32,7 @@ export default {
     playerSolution: '',
     playerCorrect: 0,
     playerWrongAnswers: [],
+    puzzleSolved: false,
   },
   mutations: {
     updateOpenedFilterPanel(state) {
@@ -74,6 +75,9 @@ export default {
     },
     cleanPlayerCorrect(state) {
       state.playerCorrect = 0;
+    },
+    updatePuzzleSolved(state, payload) {
+      state.puzzleSolved = payload;
     },
   },
   actions: {
@@ -145,6 +149,9 @@ export default {
     },
     playerWrongAnswers: (state) => {
       return state.playerWrongAnswers;
+    },
+    puzzleSolved: (state) => {
+      return state.puzzleSolved;
     },
   },
 };
