@@ -97,5 +97,6 @@ ul li {
 }
 .piece {
   margin: 0px 10px 5px 0px;
+  transform: scale(1.25);
 }
 </style>
