@@ -19,6 +19,7 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ '../views/About.vue'),
   },
+  { path: '/:notFound(.*)', redirect: '/' },
 ];
 
 const router = new VueRouter({

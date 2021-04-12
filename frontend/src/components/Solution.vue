@@ -6,13 +6,13 @@
     <v-card-subtitle>{{ solution.join(' ') }}</v-card-subtitle>
     <v-card-text>
       <v-btn
-        :href="activePuzzle.gameurl"
+        :href="puzzleLink"
         target="_blank"
         text
         outlined
         color="blue-grey darken-2"
       >
-        <span class="mr-2">Open source game on Lichess.com</span>
+        <span class="mr-2">Open puzzle on Lichess.com</span>
         <v-icon>mdi-open-in-new</v-icon>
       </v-btn>
     </v-card-text>
@@ -36,6 +36,9 @@ export default {
       'playerCorrect',
       'playerWrongAnswers',
     ]),
+    puzzleLink() {
+      return `https://lichess.org/training/${this.activePuzzle.puzzle_id}`;
+    },
   },
 };
 </script>
