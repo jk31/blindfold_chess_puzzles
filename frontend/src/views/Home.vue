@@ -27,7 +27,11 @@ export default {
     this.$store.dispatch('puzzles/loadPuzzles');
   },
   computed: {
-    ...mapGetters('puzzles', ['activePuzzleExists', 'solutionVisible']),
+    ...mapGetters('puzzles', [
+      'noPuzzles',
+      'activePuzzleExists',
+      'solutionVisible',
+    ]),
   },
 };
 </script>

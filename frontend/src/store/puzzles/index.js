@@ -5,6 +5,7 @@ export default {
     ratingRange: [800, 1500],
     numberOfPiecesRange: [4, 7],
     puzzles: [],
+    noPuzzles: false,
     activePuzzleExists: false,
     activePuzzle: {
       puzzle_id: '03zfY',
@@ -31,6 +32,9 @@ export default {
     puzzleSolved: false,
   },
   mutations: {
+    updateNoPuzzles(state, payload) {
+      state.noPuzzles = payload;
+    },
     updateOpenedFilterPanel(state) {
       if (state.openedFilterPanel[0] === 0) {
         state.openedFilterPanel = [];
@@ -53,6 +57,9 @@ export default {
     updateActivePuzzle(state, payload) {
       state.activePuzzleExists = true;
       state.activePuzzle = payload;
+    },
+    updateActivePuzzleExists(state, payload) {
+      state.activePuzzleExists = payload;
     },
     updateSolutionVisible(state, payload) {
       state.solutionVisible = payload;
@@ -89,16 +96,28 @@ export default {
           puzzle.number_of_pieces >= state.numberOfPiecesRange[0] &&
           puzzle.number_of_pieces <= state.numberOfPiecesRange[1]
       );
-      let activePuzzle =
-        filteredPuzzles[Math.floor(Math.random() * filteredPuzzles.length)];
-      commit('updateSolutionVisible', false);
-      commit('updateActivePuzzle', activePuzzle);
-      commit('cleanPlayerWrongAnswers');
-      commit('updatePlayerSolution', '');
-      commit('cleanPlayerCorrect');
+
+      if (filteredPuzzles.length == 0) {
+        commit('updateNoPuzzles', true);
+        commit('updateActivePuzzleExists', false);
+      } else {
+        let activePuzzle =
+          filteredPuzzles[Math.floor(Math.random() * filteredPuzzles.length)];
+
+        commit('closeOpenedFilterPanel');
+        commit('updateNoPuzzles', false);
+        commit('updateSolutionVisible', false);
+        commit('updateActivePuzzle', activePuzzle);
+        commit('cleanPlayerWrongAnswers');
+        commit('updatePlayerSolution', '');
+        commit('cleanPlayerCorrect');
+      }
     },
   },
   getters: {
+    noPuzzles: (state) => {
+      return state.noPuzzles;
+    },
     activePuzzle: (state) => {
       return state.activePuzzle;
     },
