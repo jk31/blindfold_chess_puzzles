@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar app color="primary" dark>
+    <v-app-bar app absolute color="primary" dark>
       <v-btn to="/" text> Blindfold Chess Puzzles v.0.1</v-btn>
 
       <v-spacer></v-spacer>
