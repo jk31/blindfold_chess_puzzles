@@ -14,7 +14,7 @@
         <v-timeline dense>
           <v-timeline-item small>
             <div class="py-4">
-              <h2 class="mb-3">v.0.1 - 12th April 2012</h2>
+              <h2 class="mb-3">v.0.1 - 12th April 2021</h2>
               <ul>
                 <li>
                   First version
