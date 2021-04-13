@@ -23,7 +23,7 @@
             color="primary"
             class="mb-3 mr-3"
             @click="checkSolution"
-            :disabled="playerSolution === '' || solutionVisible"
+            :disabled="playerSolution.length === 0 || solutionVisible"
             style="width: 200px"
             >Check Move</v-btn
           ><v-btn
@@ -112,11 +112,12 @@ export default {
   },
   methods: {
     cleanTextInput() {
+      console.log('dasdsd');
       this.$store.commit('puzzles/updatePlayerSolution', '');
     },
     checkSolution() {
       // if no input stop
-      if (this.playerSolution === '') {
+      if (this.playerSolution.length === 0) {
         return;
       }
 
