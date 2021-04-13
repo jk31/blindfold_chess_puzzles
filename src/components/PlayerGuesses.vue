@@ -14,6 +14,7 @@
             placeholder="Qxh7#"
             autocomplete="off"
             clearable
+            @click:clear="cleanTextInput"
             :disabled="solutionVisible"
             style="width: 200px"
             @keyup.enter="checkSolution"
@@ -110,6 +111,9 @@ export default {
     },
   },
   methods: {
+    cleanTextInput() {
+      this.$store.commit('puzzles/updatePlayerSolution', '');
+    },
     checkSolution() {
       // if no input stop
       if (this.playerSolution === '') {

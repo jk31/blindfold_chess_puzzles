@@ -1,9 +1,11 @@
 <template>
   <v-card elevation="2" id="solution">
     <v-card-title class="mb-3"
-      >Solution including opponent's moves:
+      >Solution including opponent's responses:
     </v-card-title>
-    <v-card-subtitle>{{ solution.join(' ') }}</v-card-subtitle>
+    <v-card-subtitle class="font-weight-bold">{{
+      solution.join(' ')
+    }}</v-card-subtitle>
     <v-card-text>
       <v-btn
         :href="puzzleLink"
