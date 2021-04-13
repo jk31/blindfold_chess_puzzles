@@ -7,7 +7,7 @@
         {{ castling }}
         {{ enPassant }}
       </v-card-subtitle>
-      <v-card-text class="d-sm-flex justify-space-around">
+      <v-card-text class="d-flex justify-space-around">
         <ul>
           <li v-for="(squares, piece) in activePuzzle.positions" :key="piece">
             <KingWhite v-if="piece === 'K'" class="piece" />
